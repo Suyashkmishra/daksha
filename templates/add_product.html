@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>DAKSHA - Add Product</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+
+    <nav class="navbar">
+
+        <div class="logo">
+            DAKSHA
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="/entrepreneur">
+                Dashboard
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <div class="auth-container">
+
+
+        <h1>
+            Add Product
+        </h1>
+
+
+        <p>
+            Add a product to
+            <strong>
+                {{ business["business_name"] }}
+            </strong>
+        </p>
+
+
+
+        <form method="POST">
+
+
+            <!-- PRODUCT NAME -->
+
+            <input type="text" name="name" placeholder="Product Name" required>
+
+
+
+            <!-- PRODUCT DESCRIPTION -->
+
+            <textarea name="description" placeholder="Product Description" rows="5" required></textarea>
+
+
+
+            <!-- PRODUCT PRICE -->
+
+            <input type="number" name="price" placeholder="Price (₹)" min="1" step="0.01" required>
+
+
+
+            <button type="submit">
+                Add Product
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+</body>
+
+</html>

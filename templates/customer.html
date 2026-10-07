@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>DAKSHA - Discover</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            DAKSHA
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="/customer">
+                Home
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- DASHBOARD -->
+
+    <section class="dashboard">
+
+
+        <h1>
+            Welcome, {{ name }}
+        </h1>
+
+
+        <p>
+            Discover amazing women-led businesses around you.
+        </p>
+
+
+
+        <!-- LOCATION -->
+
+        <div class="location-banner">
+
+
+
+            <strong>
+                Your Location:
+            </strong>
+
+            {{ customer_location }}
+
+        </div>
+
+
+
+        <!-- SEARCH AND FILTER -->
+
+        <div class="filter-box">
+
+            <form method="GET" action="/customer">
+
+
+                <input type="text" name="search" placeholder="Search businesses..."
+                    value="{{ request.args.get('search', '') }}">
+
+
+                <select name="category">
+
+                    <option value="">
+                        All Categories
+                    </option>
+
+                    <option value="Cloud Kitchen" {% if request.args.get('category')=='Cloud Kitchen' %} selected {%
+                        endif %}>
+                        Cloud Kitchen
+                    </option>
+
+
+                    <option value="Embroidery" {% if request.args.get('category')=='Embroidery' %} selected {% endif %}>
+                        Embroidery
+                    </option>
+
+
+                    <option value="Fashion" {% if request.args.get('category')=='Fashion' %} selected {% endif %}>
+                        Fashion
+                    </option>
+
+
+                    <option value="Handmade" {% if request.args.get('category')=='Handmade' %} selected {% endif %}>
+                        Handmade
+                    </option>
+
+
+                    <option value="Bakery" {% if request.args.get('category')=='Bakery' %} selected {% endif %}>
+                        Bakery
+                    </option>
+
+
+                    <option value="Beauty" {% if request.args.get('category')=='Beauty' %} selected {% endif %}>
+                        Beauty
+                    </option>
+
+                </select>
+
+
+                <input type="text" name="location" placeholder="Location"
+                    value="{{ request.args.get('location', '') }}">
+
+
+                <button type="submit">
+                    Search
+                </button>
+
+
+            </form>
+
+        </div>
+
+
+
+        <!-- QUICK CATEGORIES -->
+
+        <h2>
+            Explore Categories
+        </h2>
+
+
+        <div class="category-container">
+
+
+            <a href="/customer?category=Cloud%20Kitchen" class="category">
+
+                Cloud Kitchen
+
+            </a>
+
+
+            <a href="/customer?category=Embroidery" class="category">
+
+                Embroidery
+
+            </a>
+
+
+            <a href="/customer?category=Fashion" class="category">
+
+                Fashion
+
+            </a>
+
+
+            <a href="/customer?category=Handmade" class="category">
+
+                Handmade
+
+            </a>
+
+
+            <a href="/customer?category=Bakery" class="category">
+
+                Bakery
+
+            </a>
+
+
+            <a href="/customer?category=Beauty" class="category">
+
+                Beauty
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- BUSINESSES -->
+
+        <h2>
+            Women-led Businesses
+        </h2>
+
+
+        {% if businesses %}
+
+
+        <div class="business-container">
+
+
+            {% for business in businesses %}
+
+
+            <div class="business-card">
+
+
+                <div class="business-icon">
+
+                    {% if business["category"] == "Cloud Kitchen" %}
+
+
+
+                    {% elif business["category"] == "Embroidery" %}
+
+
+
+                    {% elif business["category"] == "Fashion" %}
+
+
+
+                    {% elif business["category"] == "Bakery" %}
+
+
+
+                    {% elif business["category"] == "Beauty" %}
+
+
+
+                    {% else %}
+
+
+
+                    {% endif %}
+
+                </div>
+
+
+                <h3>
+                    {{ business["business_name"] }}
+                </h3>
+
+
+                <p>
+                    {{ business["category"] }}
+                </p>
+
+
+                <p>
+                    {{ business["location"] }}
+                </p>
+
+
+                <p>
+                    {{ business["description"] }}
+                </p>
+
+
+                <br>
+
+
+                <a href="/business/{{ business['id'] }}">
+
+                    <button>
+                        View Business
+                    </button>
+
+                </a>
+
+
+            </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- NO RESULTS -->
+
+        <div class="business-card">
+
+            <h3>
+                No businesses found
+            </h3>
+
+            <p>
+                Try changing your search, category,
+                or location.
+            </p>
+
+
+            <a href="/customer">
+
+                <button>
+                    View All Businesses
+                </button>
+
+            </a>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+</body>
+
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>DAKSHA - Entrepreneur Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            DAKSHA
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/entrepreneur">
+                Dashboard
+            </a>
+            <a href="/grow">
+                DAKSHA GROW
+            </a>
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- DASHBOARD -->
+
+    <section class="dashboard">
+
+
+        <h1>
+            Welcome, {{ name }} 👋
+        </h1>
+
+
+        <p>
+            Let's grow your business beyond your neighborhood.
+        </p>
+
+
+
+        <!-- BUSINESS SECTION -->
+
+        {% if business %}
+
+
+        <div class="business-card">
+
+            <h2>
+                {{ business["business_name"] }}
+            </h2>
+
+
+            <p>
+                🏷️ {{ business["category"] }}
+            </p>
+
+
+            <p>
+                📍 {{ business["location"] }}
+            </p>
+
+
+            <p>
+                {{ business["description"] }}
+            </p>
+
+
+            <!-- ADD PRODUCT BUTTON -->
+
+            <a href="/add-product">
+
+                <button>
+                    + Add Product
+                </button>
+
+            </a>
+
+        </div>
+
+
+
+        <!-- PRODUCTS -->
+
+        <h2>
+            🛍️ Your Products
+        </h2>
+
+
+        <div class="business-container">
+
+
+            {% if products %}
+
+
+            {% for product in products %}
+
+
+            <div class="business-card">
+
+                <h3>
+                    {{ product["name"] }}
+                </h3>
+
+
+                <p>
+                    {{ product["description"] }}
+                </p>
+
+
+                <h3>
+                    ₹{{ product["price"] }}
+                </h3>
+
+            </div>
+            <!-- ==========================================
+     CUSTOMER REQUESTS
+========================================== -->
+
+            {% if business %}
+
+            <div class="dashboard-section">
+
+                <h2>
+                    Customer Requests
+                </h2>
+
+                <p class="section-subtitle">
+                    People interested in your business.
+                </p>
+
+
+                {% if requests %}
+
+                <div class="request-list">
+
+                    {% for item in requests %}
+
+                    <div class="entrepreneur-request">
+
+                        <div class="request-header">
+
+                            <h3>
+                                {{ item["customer_name"] }}
+                            </h3>
+
+                            <span>
+                                {{ item["status"] }}
+                            </span>
+
+                        </div>
+
+
+                        <p>
+                            {{ item["message"] }}
+                        </p>
+
+
+                        <small>
+                            {{ item["customer_email"] }}
+                        </small>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                {% else %}
+
+                <div class="no-requests">
+
+                    <p>
+                        No customer requests yet.
+                    </p>
+
+                    <p>
+                        When customers contact you, their requests will appear here.
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+            {% endif %}
+
+
+            {% endfor %}
+
+
+            {% else %}
+
+
+            <div class="business-card">
+
+                <h3>
+                    No Products Yet
+                </h3>
+
+                <p>
+                    Add your first product and start
+                    reaching customers.
+                </p>
+
+                <a href="/add-product">
+
+                    <button>
+                        Add Your First Product
+                    </button>
+
+                </a>
+
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+
+        {% else %}
+
+
+        <!-- NO BUSINESS YET -->
+
+        <div class="business-card">
+
+            <h2>
+                🏪 Create Your Business
+            </h2>
+
+
+            <p>
+                Create your business profile and
+                start reaching more customers.
+            </p>
+
+
+            <a href="/create-business">
+
+                <button>
+                    Create Business Profile
+                </button>
+
+            </a>
+
+        </div>
+
+
+        {% endif %}
+
+
+
+        <!-- GROWTH SECTION -->
+
+        <h2>
+            📈 Your Growth
+        </h2>
+
+
+        <div class="business-container">
+
+
+            <div class="business-card">
+
+                <h3>
+                    👀 Profile Views
+                </h3>
+
+                <h2>
+                    0
+                </h2>
+
+            </div>
+
+
+            <div class="business-card">
+
+                <h3>
+                    🛍️ Products
+                </h3>
+
+                <h2>
+                    {{ products|length }}
+                </h2>
+
+            </div>
+
+
+            <div class="business-card">
+
+                <h3>
+                    ⭐ Reviews
+                </h3>
+
+                <h2>
+                    0
+                </h2>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- GROW YOUR BUSINESS -->
+
+        <h2>
+            🚀 Grow Your Business
+        </h2>
+
+
+        <div class="business-container">
+
+
+            <div class="business-card">
+
+                <h3>
+                    💰 Pricing
+                </h3>
+
+                <p>
+                    Learn how to set a profitable
+                    price for your products.
+                </p>
+
+            </div>
+
+
+            <div class="business-card">
+
+                <h3>
+                    📸 Product Photography
+                </h3>
+
+                <p>
+                    Learn how better product photos
+                    can attract customers.
+                </p>
+
+            </div>
+
+
+            <div class="business-card">
+
+                <h3>
+                    📢 Marketing
+                </h3>
+
+                <p>
+                    Learn simple ways to promote
+                    your business.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</body>
+
+</html>

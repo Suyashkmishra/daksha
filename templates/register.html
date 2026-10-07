@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>DAKSHA - Register</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+
+    <div class="auth-container">
+
+        <h1>Join DAKSHA</h1>
+
+        <p>Start your journey with us.</p>
+
+
+        <form method="POST">
+
+
+            <input type="text" name="name" placeholder="Full Name" required>
+
+
+            <input type="email" name="email" placeholder="Email" required>
+
+
+            <input type="password" name="password" placeholder="Password" required>
+
+
+            <select name="role" required>
+
+                <option value="">
+                    Select Account Type
+                </option>
+
+                <option value="customer">
+                    Customer
+                </option>
+
+                <option value="entrepreneur">
+                    Women Entrepreneur
+                </option>
+
+            </select>
+
+
+            <input type="text" name="location" placeholder="Your Location" required>
+
+
+            <button type="submit">
+                Create Account
+            </button>
+
+
+        </form>
+
+
+        <p>
+            Already have an account?
+
+            <a href="/login">
+                Login
+            </a>
+
+        </p>
+
+
+    </div>
+
+
+</body>
+
+</html>

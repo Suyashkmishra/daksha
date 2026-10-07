@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DAKSHA GROW</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- ================================= -->
+    <!-- NAVBAR -->
+    <!-- ================================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            DAKSHA
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/entrepreneur">
+                Dashboard
+            </a>
+
+            <a href="/grow">
+                DAKSHA GROW
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ================================= -->
+    <!-- MAIN -->
+    <!-- ================================= -->
+
+    <div class="grow-container">
+
+
+        <!-- HERO -->
+
+        <div class="grow-hero">
+
+            <div>
+
+                <p class="grow-label">
+                    DAKSHA GROW
+                </p>
+
+                <h1>
+                    Grow Your Business
+                </h1>
+
+                <p>
+                    Small improvements can take your business
+                    from your neighborhood to a wider market.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- SCORE -->
+        <!-- ================================= -->
+
+        <div class="grow-score-card">
+
+            <div class="score-left">
+
+                <p class="small-heading">
+                    YOUR BUSINESS GROWTH SCORE
+                </p>
+
+                <h2>
+                    {{ score }}/100
+                </h2>
+
+                <p>
+                    {{ growth_message }}
+                </p>
+
+            </div>
+
+
+            <div class="score-circle">
+
+                <span>
+                    {{ score }}
+                </span>
+
+                <small>
+                    /100
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- PROGRESS -->
+        <!-- ================================= -->
+
+        <div class="grow-section">
+
+            <h2>
+                Your Growth Checklist
+            </h2>
+
+            <p class="section-subtitle">
+                Complete these steps to strengthen your business.
+            </p>
+
+
+            <div class="checklist">
+
+
+                <!-- BUSINESS -->
+
+                <div class="check-item">
+
+                    <div class="check-icon">
+                        {% if business %}
+                        ✓
+                        {% else %}
+                        1
+                        {% endif %}
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Create your business profile
+                        </h3>
+
+                        <p>
+                            Tell customers what your business offers.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CATEGORY -->
+
+                <div class="check-item">
+
+                    <div class="check-icon">
+
+                        {% if business and business["category"] %}
+                        ✓
+                        {% else %}
+                        2
+                        {% endif %}
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Add your business category
+                        </h3>
+
+                        <p>
+                            Help customers discover your business.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- LOCATION -->
+
+                <div class="check-item">
+
+                    <div class="check-icon">
+
+                        {% if business and business["location"] %}
+                        ✓
+                        {% else %}
+                        3
+                        {% endif %}
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Add your location
+                        </h3>
+
+                        <p>
+                            Make it easier for nearby customers to find you.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PRODUCT -->
+
+                <div class="check-item">
+
+                    <div class="check-icon">
+
+                        {% if products|length >= 1 %}
+                        ✓
+                        {% else %}
+                        4
+                        {% endif %}
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Add your first product
+                        </h3>
+
+                        <p>
+                            Show customers what you sell.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- MORE PRODUCTS -->
+
+                <div class="check-item">
+
+                    <div class="check-icon">
+
+                        {% if products|length >= 3 %}
+                        ✓
+                        {% else %}
+                        5
+                        {% endif %}
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Add 3 or more products
+                        </h3>
+
+                        <p>
+                            Give customers more choices.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- LEARNING -->
+        <!-- ================================= -->
+
+        <div class="grow-section">
+
+            <h2>
+                Learn & Grow
+            </h2>
+
+            <p class="section-subtitle">
+                Simple business knowledge for your next step.
+            </p>
+
+
+            <div class="growth-grid">
+
+
+                <div class="growth-card">
+
+                    <div class="growth-icon">
+                        💰
+                    </div>
+
+                    <h3>
+                        Smart Pricing
+                    </h3>
+
+                    <p>
+                        Calculate your material cost, time and
+                        profit before deciding your selling price.
+                    </p>
+
+                    <strong>
+                        Tip:
+                    </strong>
+
+                    <span>
+                        Never forget to include your time and effort.
+                    </span>
+
+                </div>
+
+
+
+                <div class="growth-card">
+
+                    <div class="growth-icon">
+                        📸
+                    </div>
+
+                    <h3>
+                        Better Product Photos
+                    </h3>
+
+                    <p>
+                        Good photographs can make handmade and
+                        homemade products more attractive.
+                    </p>
+
+                    <strong>
+                        Tip:
+                    </strong>
+
+                    <span>
+                        Use natural light and a clean background.
+                    </span>
+
+                </div>
+
+
+
+                <div class="growth-card">
+
+                    <div class="growth-icon">
+                        📢
+                    </div>
+
+                    <h3>
+                        Simple Marketing
+                    </h3>
+
+                    <p>
+                        Tell people what makes your product
+                        special and why they should choose you.
+                    </p>
+
+                    <strong>
+                        Tip:
+                    </strong>
+
+                    <span>
+                        Share your best products regularly.
+                    </span>
+
+                </div>
+
+
+
+                <div class="growth-card">
+
+                    <div class="growth-icon">
+                        ⭐
+                    </div>
+
+                    <h3>
+                        Customer Reviews
+                    </h3>
+
+                    <p>
+                        Positive customer feedback builds trust
+                        and encourages new customers.
+                    </p>
+
+                    <strong>
+                        Tip:
+                    </strong>
+
+                    <span>
+                        Ask happy customers to share their experience.
+                    </span>
+
+                </div>
+
+
+
+                <div class="growth-card">
+
+                    <div class="growth-icon">
+                        🏷️
+                    </div>
+
+                    <h3>
+                        Build Your Brand
+                    </h3>
+
+                    <p>
+                        A memorable business name, identity and
+                        consistent presentation make you stand out.
+                    </p>
+
+                    <strong>
+                        Tip:
+                    </strong>
+
+                    <span>
+                        Keep your business identity consistent.
+                    </span>
+
+                </div>
+
+
+
+                <div class="growth-card">
+
+                    <div class="growth-icon">
+                        🚀
+                    </div>
+
+                    <h3>
+                        Expand Your Reach
+                    </h3>
+
+                    <p>
+                        Start local, understand your customers,
+                        then gradually reach larger markets.
+                    </p>
+
+                    <strong>
+                        Tip:
+                    </strong>
+
+                    <span>
+                        Grow step-by-step instead of trying everything at once.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- ACTION -->
+        <!-- ================================= -->
+
+        <div class="grow-action">
+
+            <h2>
+                Ready to grow?
+            </h2>
+
+            <p>
+                Keep improving your business profile and products.
+            </p>
+
+            <a href="/entrepreneur" class="grow-button">
+
+                Back to Dashboard
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>DAKSHA - Create Business</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+
+    <nav class="navbar">
+
+        <div class="logo">
+            DAKSHA
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/entrepreneur">
+                Dashboard
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <div class="auth-container">
+
+        <h1>Create Your Business</h1>
+
+        <p>
+            Tell customers about your business.
+        </p>
+
+
+        <form method="POST">
+
+
+            <input type="text" name="business_name" placeholder="Business Name" required>
+
+
+            <select name="category" required>
+
+                <option value="">
+                    Select Category
+                </option>
+
+                <option value="Cloud Kitchen">
+                    Cloud Kitchen
+                </option>
+
+                <option value="Embroidery">
+                    Embroidery
+                </option>
+
+                <option value="Fashion">
+                    Fashion
+                </option>
+
+                <option value="Handmade">
+                    Handmade
+                </option>
+
+                <option value="Bakery">
+                    Bakery
+                </option>
+
+                <option value="Beauty">
+                    Beauty
+                </option>
+
+            </select>
+
+
+            <textarea name="description" placeholder="Tell customers about your business" rows="5" required></textarea>
+
+
+            <input type="text" name="location" placeholder="Business Location" required>
+
+
+            <button type="submit">
+                Create Business
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+
+</body>
+
+</html>

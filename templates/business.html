@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ business["business_name"] }} | DAKSHA</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+     NAVBAR
+========================================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            DAKSHA
+        </div>
+
+        <div class="nav-links">
+
+            {% if session.get("role") == "entrepreneur" %}
+
+            <a href="/entrepreneur">
+                Dashboard
+            </a>
+
+            <a href="/grow">
+                🌱 DAKSHA GROW
+            </a>
+
+            {% else %}
+
+            <a href="/customer">
+                Marketplace
+            </a>
+
+            {% endif %}
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ==========================================
+     BUSINESS HEADER
+========================================== -->
+
+    <div class="business-page-container">
+
+        <div class="business-header-card">
+
+            <div class="business-icon-large">
+                🏪
+            </div>
+
+            <div class="business-header-info">
+
+                <p class="business-category">
+                    {{ business["category"] }}
+                </p>
+
+                <h1>
+                    {{ business["business_name"] }}
+                </h1>
+
+                <p class="business-location">
+                    📍 {{ business["location"] }}
+                </p>
+
+                <p class="business-description">
+                    {{ business["description"] }}
+                </p>
+
+
+                <!-- RATING -->
+
+                <div class="business-rating">
+
+                    {% if review_count > 0 %}
+
+                    <span class="rating-stars">
+                        ⭐ {{ average_rating }}/5
+                    </span>
+
+                    <span class="review-count">
+                        {{ review_count }} review{% if review_count != 1 %}s{% endif %}
+                    </span>
+
+                    {% else %}
+
+                    <span class="no-rating">
+                        ⭐ No reviews yet
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==========================================
+         PRODUCTS
+    ========================================== -->
+
+        <div class="business-section">
+
+            <h2>
+                Products
+            </h2>
+
+            {% if products %}
+
+            <div class="product-grid">
+
+                {% for product in products %}
+
+                <div class="product-card">
+
+                    <div class="product-icon">
+                        🛍️
+                    </div>
+
+                    <h3>
+                        {{ product["name"] }}
+                    </h3>
+
+                    <p>
+                        {{ product["description"] }}
+                    </p>
+
+                    <div class="product-price">
+                        ₹{{ product["price"] }}
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="empty-product-message">
+
+                <p>
+                    This entrepreneur has not added products yet.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- ==========================================
+         REVIEWS
+    ========================================== -->
+
+        <div class="business-section">
+
+            <h2>
+                Customer Reviews ⭐
+            </h2>
+
+
+            {% if reviews %}
+
+            <div class="reviews-list">
+
+                {% for review in reviews %}
+
+                <div class="review-card">
+
+                    <div class="review-top">
+
+                        <strong>
+                            {{ review["customer_name"] }}
+                        </strong>
+
+                        <span class="review-stars">
+
+                            {% if review["rating"] == 5 %}
+                            ⭐⭐⭐⭐⭐
+                            {% elif review["rating"] == 4 %}
+                            ⭐⭐⭐⭐
+                            {% elif review["rating"] == 3 %}
+                            ⭐⭐⭐
+                            {% elif review["rating"] == 2 %}
+                            ⭐⭐
+                            {% else %}
+                            ⭐
+                            {% endif %}
+
+                        </span>
+
+                    </div>
+
+                    {% if review["review"] %}
+
+                    <p>
+                        "{{ review["review"] }}"
+                    </p>
+
+                    {% endif %}
+
+                    <small>
+                        {{ review["created_at"] }}
+                    </small>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="empty-review-message">
+
+                <p>
+                    No reviews yet.
+                </p>
+
+                <p>
+                    Be the first customer to share your experience!
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- ==========================================
+         CUSTOMER REVIEW FORM
+    ========================================== -->
+
+        {% if session.get("role") == "customer" %}
+
+        <div class="review-form-card">
+
+            <h2>
+                Share Your Experience
+            </h2>
+
+            <p>
+                Help other customers discover great local businesses.
+            </p>
+
+
+            <form method="POST" action="/business/{{ business['id'] }}/review">
+
+                <label>
+                    Your Rating
+                </label>
+
+                <select name="rating" required>
+
+                    <option value="">
+                        Select rating
+                    </option>
+
+                    <option value="5">
+                        ⭐⭐⭐⭐⭐ Excellent
+                    </option>
+
+                    <option value="4">
+                        ⭐⭐⭐⭐ Very Good
+                    </option>
+
+                    <option value="3">
+                        ⭐⭐⭐ Good
+                    </option>
+
+                    <option value="2">
+                        ⭐⭐ Average
+                    </option>
+
+                    <option value="1">
+                        ⭐ Poor
+                    </option>
+
+                </select>
+
+
+                <label>
+                    Your Review
+                </label>
+
+                <textarea name="review" rows="4" placeholder="Tell others about your experience..."></textarea>
+
+
+                <button type="submit" class="review-button">
+                    Submit Review ⭐
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- ==========================================
+     CONTACT ENTREPRENEUR
+========================================== -->
+
+        {% if session.get("role") == "customer" %}
+
+        <div class="request-card">
+
+            <h2>
+                Interested in this business?
+            </h2>
+
+            <p>
+                Send a request to the entrepreneur.
+            </p>
+
+            <form method="POST" action="/business/{{ business['id'] }}/request">
+
+                <label>
+                    Your Message
+                </label>
+
+                <textarea name="message" rows="4"
+                    placeholder="Example: I am interested in ordering this product. Please contact me."
+                    required></textarea>
+
+                <button type="submit" class="request-button">
+                    Contact Entrepreneur
+                </button>
+
+            </form>
+
+        </div>
+
+        {% endif %}
+
+        {% endif %}
+
+
+
+        <!-- ==========================================
+         BACK
+    ========================================== -->
+
+        <div class="business-back">
+
+            {% if session.get("role") == "customer" %}
+
+            <a href="/customer">
+                ← Back to Marketplace
+            </a>
+
+            {% else %}
+
+            <a href="/entrepreneur">
+                ← Back to Dashboard
+            </a>
+
+            {% endif %}
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
